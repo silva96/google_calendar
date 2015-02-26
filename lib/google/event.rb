@@ -237,11 +237,13 @@ module Google
         \"description\": \"#{description}\",
         \"location\": \"#{location}\",
         \"start\": {
-          \"dateTime\": \"#{start_time}\"
+          #{("\"date\": \"" + start_time + "\"" )if all_day?}
+          #{("\"dateTime\": \"" + start_time + "\"" )if !all_day?}
           #{timezone_needed? ? local_timezone_json : ''}
         },
         \"end\": {
-          \"dateTime\": \"#{end_time}\"
+          #{("\"date\": \"" + end_time + "\"" )if all_day?}
++          #{("\"dateTime\": \"" + end_time + "\"" )if !all_day?}
           #{timezone_needed? ? local_timezone_json : ''}
         },
         #{recurrence_json}
